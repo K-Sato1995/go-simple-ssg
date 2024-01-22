@@ -17,6 +17,9 @@ import (
 	"github.com/gomarkdown/markdown/parser"
 )
 
+const GENERATED_HTML_DIR = "generated"
+const ASSETS_DIR = "assets"
+
 type Template struct {
 	HTMLTitle       string
 	MetaDescription string
@@ -80,12 +83,12 @@ func parseMetadata(content []byte) (MetaData, []byte, error) {
 }
 
 func generateListPage(articles []ArticleInfo) {
-	listTmpl, err := template.ParseFiles("templates/list.html")
+	listTmpl, err := template.ParseFiles(filepath.Join(ASSETS_DIR, "list.html"))
 	if err != nil {
 		log.Fatal(err)
 	}
-	if _, err := os.Stat("public"); os.IsNotExist(err) {
-		os.Mkdir("public", 0755)
+	if _, err := os.Stat(GENERATED_HTML_DIR); os.IsNotExist(err) {
+		os.Mkdir(GENERATED_HTML_DIR, 0755)
 	}
 
 	data := ListPageData{
@@ -100,7 +103,7 @@ func generateListPage(articles []ArticleInfo) {
 	if err != nil {
 		log.Fatal("Error executing list template:", err)
 	}
-	ioutil.WriteFile("public/list.html", renderedContent.Bytes(), 0644)
+	ioutil.WriteFile(filepath.Join(GENERATED_HTML_DIR, "list.html"), renderedContent.Bytes(), 0644)
 }
 
 func main() {
@@ -130,7 +133,7 @@ func main() {
 			fmt.Println("meta", metadata)
 			// List page==begin
 			baseName := strings.TrimSuffix(filepath.Base(path), ".md")
-			outputPath := filepath.Join("public", baseName+".html")
+			outputPath := filepath.Join(GENERATED_HTML_DIR, baseName+".html")
 			articles = append(articles, ArticleInfo{
 				Title: metadata.Title,
 				Path:  outputPath,
@@ -169,7 +172,7 @@ func main() {
 }
 
 func serveFiles() {
-	fs := http.FileServer(http.Dir("public"))
+	fs := http.FileServer(http.Dir(GENERATED_HTML_DIR))
 	http.Handle("/", fs)
 
 	log.Println("Serving files on http://localhost:8080...")
