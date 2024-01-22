@@ -23,6 +23,18 @@ type Template struct {
 	Content         template.HTML
 }
 
+type ArticleInfo struct {
+	Title string
+	Path  string
+}
+
+type ListPageData struct {
+	HTMLTitle       string
+	MetaDescription string
+	PageTitle       string
+	Articles        []ArticleInfo
+}
+
 type MetaData struct {
 	Title       string
 	Description string
@@ -66,15 +78,34 @@ func parseMetadata(content []byte) (MetaData, []byte, error) {
 	return meta, mdContent, nil
 }
 
+func generateListPage(articles []ArticleInfo) {
+	listTmpl, err := template.ParseFiles("templates/list.html")
+	if err != nil {
+		log.Fatal(err)
+	}
+	if _, err := os.Stat("public"); os.IsNotExist(err) {
+		os.Mkdir("public", 0755)
+	}
+
+	data := ListPageData{
+		HTMLTitle:       "Articles List",
+		MetaDescription: "List of articles",
+		PageTitle:       "Articles",
+		Articles:        articles,
+	}
+
+	var renderedContent bytes.Buffer
+	err = listTmpl.Execute(&renderedContent, data)
+	if err != nil {
+		log.Fatal("Error executing list template:", err)
+	}
+	ioutil.WriteFile("public/list.html", renderedContent.Bytes(), 0644)
+}
+
 func main() {
-	// content, err := ioutil.ReadFile("./contents/testMd.md")
-	// if err != nil {
-	// 	log.Fatalf("Error reading Markdown file: %v", err)
-	// }
-	// md := []byte(content)
-	// html := mdToHTML(md)
-	// fmt.Println(string(html))
+	var articles []ArticleInfo
 	htmlTmpl, err := template.ParseGlob("templates/detail.html")
+
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -96,11 +127,22 @@ func main() {
 				return nil
 			}
 			fmt.Println("meta", metadata)
+			// List page==begin
+			baseName := strings.TrimSuffix(filepath.Base(path), ".md")
+			outputPath := filepath.Join("public", baseName+".html")
+			articles = append(articles, ArticleInfo{
+				Title: metadata.Title,
+				Path:  outputPath,
+			})
+			// List page==end
+
+			// Create detail page template
+			parsedHtml := mdToHTML(mdContent)
 			data := Template{
 				HTMLTitle:       "Example Title",
 				MetaDescription: "Example Description",
 				PageTitle:       "My Page Title",
-				Content:         template.HTML(mdContent),
+				Content:         template.HTML(parsedHtml),
 			}
 
 			var renderedContent bytes.Buffer
@@ -109,8 +151,15 @@ func main() {
 				log.Println("Error executing template:", err)
 				return nil
 			}
-			fmt.Println(renderedContent.String())
+			err = ioutil.WriteFile(outputPath, renderedContent.Bytes(), 0644)
+			if err != nil {
+				log.Printf("Error writing file %s: %v", outputPath, err)
+				return nil
+			}
+			fmt.Printf("Article written to %s\n", outputPath)
 		}
+		// Create list page
+		generateListPage(articles)
 		return nil
 	})
 }
