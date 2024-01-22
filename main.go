@@ -7,6 +7,7 @@ import (
 	"html/template"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
@@ -158,12 +159,22 @@ func main() {
 			}
 			fmt.Printf("Article written to %s\n", outputPath)
 		}
-		// Create list page
-		generateListPage(articles)
 		return nil
 	})
+
+	// Create list page
+	generateListPage(articles)
+	serveFiles()
+
 }
 
-func fileWalk() {
+func serveFiles() {
+	fs := http.FileServer(http.Dir("public"))
+	http.Handle("/", fs)
 
+	log.Println("Serving files on http://localhost:8080...")
+	err := http.ListenAndServe(":8080", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
