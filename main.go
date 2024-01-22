@@ -1,7 +1,32 @@
 package main
 
-import "fmt"
+import (
+	"github.com/gomarkdown/markdown"
+	"github.com/gomarkdown/markdown/html"
+	"github.com/gomarkdown/markdown/parser"
+
+	"io/ioutil"
+	"log"
+)
+
+func mdToHTML(md []byte) []byte {
+	extensions := parser.CommonExtensions | parser.AutoHeadingIDs | parser.NoEmptyLineBeforeBlock
+	p := parser.NewWithExtensions(extensions)
+	doc := p.Parse(md)
+	htmlFlags := html.CommonFlags | html.HrefTargetBlank
+	opts := html.RendererOptions{Flags: htmlFlags}
+	renderer := html.NewRenderer(opts)
+
+	return markdown.Render(doc, renderer)
+}
 
 func main() {
-	fmt.Println("Hello, World!")
+	content, err := ioutil.ReadFile("./contents/testMd.md")
+	if err != nil {
+		log.Fatalf("Error reading Markdown file: %v", err)
+	}
+
+	md := []byte(content)
+	html := mdToHTML(md)
+	println(string(html))
 }
