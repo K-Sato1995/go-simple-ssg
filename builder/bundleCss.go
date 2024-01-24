@@ -10,7 +10,7 @@ import (
 	"github.com/evanw/esbuild/pkg/api"
 )
 
-func BundleAndMinifyCSS() {
+func BundleCSS() error {
 	filepath.Walk(config.ASSETS_DIR, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			log.Printf("Error accessing path %q: %v\n", path, err)
@@ -32,4 +32,5 @@ func BundleAndMinifyCSS() {
 		}
 		return nil
 	})
+	return nil
 }

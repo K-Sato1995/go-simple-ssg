@@ -8,7 +8,11 @@ import (
 )
 
 func main() {
-	builder.BundleAndMinifyCSS()
+	// Bundle css
+	err := builder.BundleCSS()
+	if err != nil {
+		log.Fatal(`error occured while bundling css`, err)
+	}
 	// Create detail pages
 	articles, err := builder.GenerateDetailPages()
 	if err != nil {
@@ -16,7 +20,6 @@ func main() {
 	}
 	// Create list page
 	builder.GenerateListPage(articles)
-
 	// Serve files for development
 	serveFiles()
 
