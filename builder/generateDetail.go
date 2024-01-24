@@ -7,14 +7,13 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"site-generator/config"
 	"site-generator/parser"
 	"strings"
 )
 
-func GenerateDetailPages() ([]ArticleInfo, error) {
+func GenerateDetailPages(templatePath string, generatedPath string) ([]ArticleInfo, error) {
 	var articles []ArticleInfo
-	htmlTmpl, err := template.ParseGlob(filepath.Join(config.ASSETS_DIR, "detail.html"))
+	htmlTmpl, err := template.ParseGlob(filepath.Join(templatePath, "detail.html"))
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +35,7 @@ func GenerateDetailPages() ([]ArticleInfo, error) {
 			fmt.Println("meta", metadata)
 			// List page==begin
 			baseName := strings.TrimSuffix(filepath.Base(path), ".md")
-			outputPath := filepath.Join(config.GENERATED_HTML_DIR, baseName+".html")
+			outputPath := filepath.Join(generatedPath, baseName+".html")
 			articles = append(articles, ArticleInfo{
 				Title: metadata.Title,
 				Path:  outputPath,

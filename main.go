@@ -7,20 +7,37 @@ import (
 	"site-generator/config"
 )
 
-func main() {
+type Engine struct {
+	Config *config.Config
+	// Logger                  *Logger
+	// HotReload               *HotReload
+}
+
+func New(config config.Config) *Engine {
+	return &Engine{
+		Config: &config,
+	}
+}
+
+func (e *Engine) Build() {
 	// Bundle css
-	err := builder.BundleCSS()
+	err := builder.BundleCSS(e.Config.TemplatePath, e.Config.GeneratedPath)
 	if err != nil {
 		log.Fatal(`error occured while bundling css`, err)
 	}
 	// Create detail pages
-	articles, err := builder.GenerateDetailPages()
+	articles, err := builder.GenerateDetailPages(e.Config.TemplatePath, e.Config.GeneratedPath)
 	if err != nil {
 		log.Fatal(`error occured while generateing detail pages`, err)
 	}
 	// Create list page
-	builder.GenerateListPage(articles)
-	// Serve files for development
+	builder.GenerateListPage(articles, e.Config.TemplatePath, e.Config.GeneratedPath)
+}
+
+func main() {
+	baseConfig := config.NewConfig(config.Config{})
+	engine := New(baseConfig)
+	engine.Build()
 	serveFiles()
 
 }

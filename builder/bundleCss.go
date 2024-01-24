@@ -4,20 +4,19 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"site-generator/config"
 	"strings"
 
 	"github.com/evanw/esbuild/pkg/api"
 )
 
-func BundleCSS() error {
-	filepath.Walk(config.ASSETS_DIR, func(path string, info os.FileInfo, err error) error {
+func BundleCSS(templatePath string, generatedPath string) error {
+	filepath.Walk(templatePath, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			log.Printf("Error accessing path %q: %v\n", path, err)
 			return err
 		}
 		if !info.IsDir() && strings.HasSuffix(path, ".css") {
-			outFile := filepath.Join(config.GENERATED_HTML_DIR, filepath.Base(path))
+			outFile := filepath.Join(generatedPath, filepath.Base(path))
 			result := api.Build(api.BuildOptions{
 				EntryPoints:  []string{path},
 				Bundle:       true,

@@ -7,7 +7,6 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"site-generator/config"
 )
 
 type Template struct {
@@ -29,13 +28,13 @@ type ListPageData struct {
 	Articles        []ArticleInfo
 }
 
-func GenerateListPage(articles []ArticleInfo) error {
-	listTmpl, err := template.ParseFiles(filepath.Join(config.ASSETS_DIR, "list.html"))
+func GenerateListPage(articles []ArticleInfo, templatePath, generatedPath string) error {
+	listTmpl, err := template.ParseFiles(filepath.Join(templatePath, "list.html"))
 	if err != nil {
 		return err
 	}
-	if _, err := os.Stat(config.GENERATED_HTML_DIR); os.IsNotExist(err) {
-		os.Mkdir(config.GENERATED_HTML_DIR, 0755)
+	if _, err := os.Stat(generatedPath); os.IsNotExist(err) {
+		os.Mkdir(generatedPath, 0755)
 	}
 
 	data := ListPageData{
@@ -51,6 +50,6 @@ func GenerateListPage(articles []ArticleInfo) error {
 		log.Fatal("Error executing list template:", err)
 		return err
 	}
-	ioutil.WriteFile(filepath.Join(config.GENERATED_HTML_DIR, "list.html"), renderedContent.Bytes(), 0644)
+	ioutil.WriteFile(filepath.Join(generatedPath, "list.html"), renderedContent.Bytes(), 0644)
 	return nil
 }
