@@ -6,10 +6,12 @@
     <meta name="title" content="{{.HTMLTitle}}"/>
     <meta name="description" content="{{.MetaDescription}}"/>
     <title>{{.PageTitle}}</title>
+    <!-- Generated path -->
+    <link rel="stylesheet" href="./detail.css">
 </head>
 <body>
     <div id="content">
-        <h1 id="pagetitle">{{.PageTitle}}</h1>
+        <h1 class="detail_title">{{.PageTitle}}</h1>
         {{.Content}}
     </div>
 </body>

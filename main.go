@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	builder.BundleAndMinifyCSS()
 	// Create detail pages
 	articles, err := builder.GenerateDetailPages()
 	if err != nil {
@@ -26,7 +27,7 @@ func serveFiles() {
 	http.Handle("/", fs)
 
 	log.Println("Serving files on http://localhost:8080...")
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":8081", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
