@@ -3,11 +3,11 @@ package builder
 import (
 	"bytes"
 	"fmt"
+	"go-simple-ssg/parser"
 	"html/template"
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"site-generator/parser"
 	"strings"
 )
 
