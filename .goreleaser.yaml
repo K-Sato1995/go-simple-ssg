@@ -9,8 +9,9 @@ builds:
     goos:
       - linux
       - windows
-      - darwin    
-    main: ./simple-ssg-cli
+      - darwin
+    dir: "simple-ssg-cli"
+    main: "./main.go"
 archives:
   - format: tar.gz
     name_template: >-
