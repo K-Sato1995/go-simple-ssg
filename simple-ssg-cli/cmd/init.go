@@ -24,7 +24,7 @@ func init() {
 	RootCmd.AddCommand(initCmd)
 }
 
-const BASE_PROJECT_PATH = "baseProject"
+const BASE_PROJECT_PATH = "example"
 const REPO_URL = "https://github.com/K-Sato1995/go-simple-ssg"
 
 func initialize(cmd *cobra.Command, args []string) {
@@ -62,7 +62,7 @@ func initialize(cmd *cobra.Command, args []string) {
 
 	err = copyDir(baseProjectPath, projectDir)
 	if err != nil {
-		fmt.Println("Error copying baseProject:", err)
+		fmt.Println("Error copying example:", err)
 		return
 	}
 
