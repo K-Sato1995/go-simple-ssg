@@ -15,12 +15,15 @@ type Template struct {
 	HTMLTitle       string
 	MetaDescription string
 	PageTitle       string
+	PublishedDate   string
 	Content         template.HTML
 }
 
 type ArticleInfo struct {
-	Title string
-	Path  string
+	Title         string
+	Description   string
+	PublishedDate string
+	Path          string
 }
 
 type ListPageData struct {
@@ -31,7 +34,7 @@ type ListPageData struct {
 }
 
 func GenerateListPage(articles []ArticleInfo, templatePath, generatedPath string, siteInfo config.SiteInfo) error {
-	listTmpl, err := template.ParseFiles(filepath.Join(templatePath, "list.html"))
+	listTmpl, err := template.ParseFiles(filepath.Join(templatePath, "index.html"))
 	if err != nil {
 		return err
 	}

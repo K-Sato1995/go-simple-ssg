@@ -3,16 +3,16 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="title" content="{{.HTMLTitle}}"/>
-    <meta name="description" content="{{.MetaDescription}}"/>
-    <title>{{.PageTitle}}</title>
-    <!-- Generated path -->
+    <meta name="title" content="My custom Blog"/>
+    <meta name="description" content="description"/>
+    <title>Test</title>
+    
     <link rel="stylesheet" href="./detail.css">
 </head>
 <body>
     <div class="container">
         <nav class="header">
-            <a href="/" class="header__title">{{.HTMLTitle}}</a>
+            <a href="/" class="header__title">My custom Blog</a>
             <ul class="header__links">
               <li class="header__links_item">
                 <a href="/" class="header__links__item__link">Home</a>
@@ -25,21 +25,24 @@
 
         <div class="post-detail">
             <div class="post-detail__top">
-              <h1 class="post-detail__top__title">{{.PageTitle}}</h1>
+              <h1 class="post-detail__top__title">Test</h1>
               <div class="post-detail__top__info">
                 <span class="post-detail__top__info__date">
-                    {{.PublishedDate}},
+                    ,
                 </span>
                 <a class="post-detail__top__info__author" href="/about">by K-Sato</a>
               </div>
             </div>
 
             <div class="post-detail__content">
-                {{.Content}}
+                <h1 id="notfound">NotFound</h1>
+
             </div>
         </div>
 
   
+  
+
         <footer class="footer">
             <ul class="footer__links">
               <li class="footer__links_item">

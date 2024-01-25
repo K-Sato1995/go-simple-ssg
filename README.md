@@ -20,4 +20,6 @@ simple-ssg-cli init
   - create cmd to copy the template
 - [ ] write tests
 - [ ] SEO stuff
+- [ ] Custom Error pages(404)
+- [ ] Custom Metadata
 - [ ] HMR

@@ -26,7 +26,7 @@ func (e *Engine) Build() {
 		log.Fatal(`error occured while bundling css`, err)
 	}
 	// Create detail pages
-	articles, err := builder.GenerateDetailPages(e.Config.TemplatePath, e.Config.GeneratedPath)
+	articles, err := builder.GenerateDetailPages(e.Config.TemplatePath, e.Config.GeneratedPath, e.Config.SiteInfo)
 	if err != nil {
 		log.Fatal(`error occured while generateing detail pages`, err)
 	}

@@ -7,8 +7,9 @@ import (
 )
 
 type MetaData struct {
-	Title       string
-	Description string
+	Title         string
+	Description   string
+	PublishedDate string
 }
 
 func ParseMetadata(content []byte) (MetaData, []byte, error) {
@@ -34,6 +35,8 @@ func ParseMetadata(content []byte) (MetaData, []byte, error) {
 			meta.Title = value
 		case "Description":
 			meta.Description = value
+		case "PublishedDate":
+			meta.PublishedDate = value
 		}
 	}
 	return meta, mdContent, nil

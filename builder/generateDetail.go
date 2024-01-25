@@ -9,10 +9,11 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/K-Sato1995/go-simple-ssg/config"
 	"github.com/K-Sato1995/go-simple-ssg/parser"
 )
 
-func GenerateDetailPages(templatePath string, generatedPath string) ([]ArticleInfo, error) {
+func GenerateDetailPages(templatePath string, generatedPath string, siteInfo config.SiteInfo) ([]ArticleInfo, error) {
 	var articles []ArticleInfo
 	htmlTmpl, err := template.ParseGlob(filepath.Join(templatePath, "detail.html"))
 	if err != nil {
@@ -35,18 +36,21 @@ func GenerateDetailPages(templatePath string, generatedPath string) ([]ArticleIn
 			}
 			fmt.Println("meta", metadata)
 			baseName := strings.TrimSuffix(filepath.Base(path), ".md")
-			outputPath := baseName + ".html"
+			outputPath := filepath.Join(generatedPath, baseName+".html")
 			articles = append(articles, ArticleInfo{
-				Title: metadata.Title,
-				Path:  outputPath,
+				Title:         metadata.Title,
+				Description:   metadata.Description,
+				PublishedDate: metadata.PublishedDate,
+				Path:          baseName + ".html",
 			})
 
 			// Create detail page template
 			parsedHtml := parser.MdToHTML(mdContent)
 			data := Template{
-				HTMLTitle:       metadata.Title,
+				HTMLTitle:       siteInfo.Title,
 				MetaDescription: metadata.Description,
 				PageTitle:       metadata.Title,
+				PublishedDate:   metadata.PublishedDate,
 				Content:         template.HTML(parsedHtml),
 			}
 
