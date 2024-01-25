@@ -7,6 +7,8 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+
+	"github.com/K-Sato1995/go-simple-ssg/config"
 )
 
 type Template struct {
@@ -28,7 +30,7 @@ type ListPageData struct {
 	Articles        []ArticleInfo
 }
 
-func GenerateListPage(articles []ArticleInfo, templatePath, generatedPath string) error {
+func GenerateListPage(articles []ArticleInfo, templatePath, generatedPath string, siteInfo config.SiteInfo) error {
 	listTmpl, err := template.ParseFiles(filepath.Join(templatePath, "list.html"))
 	if err != nil {
 		return err
@@ -38,9 +40,9 @@ func GenerateListPage(articles []ArticleInfo, templatePath, generatedPath string
 	}
 
 	data := ListPageData{
-		HTMLTitle:       "Articles List",
-		MetaDescription: "List of articles",
-		PageTitle:       "Articles",
+		HTMLTitle:       siteInfo.Title,
+		MetaDescription: siteInfo.Description,
+		PageTitle:       siteInfo.Title,
 		Articles:        articles,
 	}
 
@@ -50,6 +52,6 @@ func GenerateListPage(articles []ArticleInfo, templatePath, generatedPath string
 		log.Fatal("Error executing list template:", err)
 		return err
 	}
-	ioutil.WriteFile(filepath.Join(generatedPath, "list.html"), renderedContent.Bytes(), 0644)
+	ioutil.WriteFile(filepath.Join(generatedPath, "index.html"), renderedContent.Bytes(), 0644)
 	return nil
 }

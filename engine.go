@@ -31,5 +31,5 @@ func (e *Engine) Build() {
 		log.Fatal(`error occured while generateing detail pages`, err)
 	}
 	// Create list page
-	builder.GenerateListPage(articles, e.Config.TemplatePath, e.Config.GeneratedPath)
+	builder.GenerateListPage(articles, e.Config.TemplatePath, e.Config.GeneratedPath, e.Config.SiteInfo)
 }

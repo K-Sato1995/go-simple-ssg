@@ -10,7 +10,12 @@ import (
 )
 
 func main() {
-	baseConfig := config.NewConfig(config.Config{})
+	baseConfig := config.NewConfig(config.Config{
+		SiteInfo: config.SiteInfo{
+			Title:       "My custom Blog",
+			Description: "This is my custom blog",
+		},
+	})
 	engine := gosimplessg.New(baseConfig)
 	engine.Build()
 	serveFiles()

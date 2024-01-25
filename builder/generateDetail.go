@@ -34,21 +34,19 @@ func GenerateDetailPages(templatePath string, generatedPath string) ([]ArticleIn
 				return err
 			}
 			fmt.Println("meta", metadata)
-			// List page==begin
 			baseName := strings.TrimSuffix(filepath.Base(path), ".md")
-			outputPath := filepath.Join(generatedPath, baseName+".html")
+			outputPath := baseName + ".html"
 			articles = append(articles, ArticleInfo{
 				Title: metadata.Title,
 				Path:  outputPath,
 			})
-			// List page==end
 
 			// Create detail page template
 			parsedHtml := parser.MdToHTML(mdContent)
 			data := Template{
-				HTMLTitle:       "Example Title",
-				MetaDescription: "Example Description",
-				PageTitle:       "My Page Title",
+				HTMLTitle:       metadata.Title,
+				MetaDescription: metadata.Description,
+				PageTitle:       metadata.Title,
 				Content:         template.HTML(parsedHtml),
 			}
 
