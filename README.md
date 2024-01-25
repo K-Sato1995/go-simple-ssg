@@ -1,9 +1,15 @@
-# WIP
+# Initialization
 
-My SSG in Golang.
+Install the cli.
 
 ```
-go run main.go
+go install github.com/K-Sato1995/go-simple-ssg/simple-ssg-cli@latest
+```
+
+run 
+
+```
+simple-ssg-cli init
 ```
 
 
