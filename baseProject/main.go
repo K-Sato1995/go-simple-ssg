@@ -14,7 +14,6 @@ func main() {
 	engine := gosimplessg.New(baseConfig)
 	engine.Build()
 	serveFiles()
-
 }
 
 func serveFiles() {
