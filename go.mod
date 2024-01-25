@@ -1,4 +1,4 @@
-module go-simple-ssg
+module github.com/K-Sato1995/go-simple-ssg
 
 go 1.21.6
 

@@ -3,12 +3,13 @@ package builder
 import (
 	"bytes"
 	"fmt"
-	"go-simple-ssg/parser"
 	"html/template"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/K-Sato1995/go-simple-ssg/parser"
 )
 
 func GenerateDetailPages(templatePath string, generatedPath string) ([]ArticleInfo, error) {

@@ -1,9 +1,10 @@
 package engine
 
 import (
-	"go-simple-ssg/builder"
-	"go-simple-ssg/config"
 	"log"
+
+	"github.com/K-Sato1995/go-simple-ssg/builder"
+	"github.com/K-Sato1995/go-simple-ssg/config"
 )
 
 type Engine struct {

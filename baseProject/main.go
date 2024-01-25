@@ -1,10 +1,12 @@
 package main
 
 import (
-	gosimplessg "go-simple-ssg"
-	"go-simple-ssg/config"
 	"log"
 	"net/http"
+
+	gosimplessg "github.com/K-Sato1995/go-simple-ssg"
+
+	"github.com/K-Sato1995/go-simple-ssg/config"
 )
 
 func main() {

@@ -3,7 +3,7 @@
 Install the cli.
 
 ```
-go install github.com/K-Sato1995/go-simple-ssg/simple-ssg-cli@latest
+go install github.com/K-Sato1995/github.com/K-Sato1995/go-simple-ssg/simple-ssg-cli@latest
 ```
 
 run 
