@@ -13,6 +13,5 @@ go run main.go
   - put all the code in one func
   - create cmd to copy the template
 - [ ] write tests
-- [ ] Config file(yml): make the paths custamizable
 - [ ] SEO stuff
 - [ ] HMR
