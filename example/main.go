@@ -16,6 +16,10 @@ func main() {
 			Title:       "Go Simple SSG",
 			Description: "This is my custom blog",
 		},
+		// INFO: Change the following values if you want to customize the directory structure.
+		// TemplatePath:  "templates",
+		// GeneratedPath: "generated",
+		// ContentPath:   "contents",
 	})
 	engine := gosimplessg.New(baseConfig)
 	go startHMR(baseConfig.TemplatePath, baseConfig.ContentPath, engine)
@@ -55,7 +59,6 @@ func startHMR(templatePath string, contentPath string, engine *gosimplessg.Engin
 			}
 		}
 	}()
-
 	if err := w.Start(250); err != nil {
 		log.Fatal(err)
 	}

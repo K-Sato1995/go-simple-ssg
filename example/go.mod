@@ -3,7 +3,7 @@ module example
 go 1.21.6
 
 require (
-	github.com/K-Sato1995/go-simple-ssg v0.0.5
+	github.com/K-Sato1995/go-simple-ssg v0.0.6
 	github.com/radovskyb/watcher v1.0.7
 )
 

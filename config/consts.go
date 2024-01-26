@@ -9,11 +9,11 @@ type SiteInfo struct {
 	Description string
 }
 type Config struct {
-	TemplatePath        string // dir that contains base html/css
-	GeneratedPath       string // dir that contains generated html/css
-	ContentPath         string // dir that contains markdown files
-	SiteInfo            SiteInfo
-	HotReloadServerPort int
+	TemplatePath  string // dir that contains base html/css
+	GeneratedPath string // dir that contains generated html/css
+	ContentPath   string // dir that contains markdown files
+	SiteInfo      SiteInfo
+	// HotReloadServerPort int
 }
 
 func NewConfig(custom Config) Config {
@@ -25,7 +25,7 @@ func NewConfig(custom Config) Config {
 			Title:       "My Blog",
 			Description: "This is my blog",
 		},
-		HotReloadServerPort: 8080,
+		// HotReloadServerPort: 8080,
 	}
 	if custom.SiteInfo.Title != "" {
 		config.SiteInfo.Title = custom.SiteInfo.Title
@@ -39,8 +39,8 @@ func NewConfig(custom Config) Config {
 	if custom.GeneratedPath != "" {
 		config.GeneratedPath = custom.GeneratedPath
 	}
-	if custom.HotReloadServerPort != 0 {
-		config.HotReloadServerPort = custom.HotReloadServerPort
-	}
+	// if custom.HotReloadServerPort != 0 {
+	// 	config.HotReloadServerPort = custom.HotReloadServerPort
+	// }
 	return config
 }
