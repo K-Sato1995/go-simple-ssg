@@ -13,7 +13,7 @@ import (
 func main() {
 	baseConfig := config.NewConfig(config.Config{
 		SiteInfo: config.SiteInfo{
-			Title:       "My custom Blog",
+			Title:       "Go Simple SSG",
 			Description: "This is my custom blog",
 		},
 	})
