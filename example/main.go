@@ -25,8 +25,8 @@ func main() {
 func serveFiles() {
 	fs := http.FileServer(http.Dir(config.GENERATED_HTML_DIR))
 	http.Handle("/", fs)
-	log.Println("Serving files on http://localhost:8080...")
-	err := http.ListenAndServe(":8081", nil)
+	log.Println("Serving files on http://localhost:3001...")
+	err := http.ListenAndServe(":3001", nil)
 	if err != nil {
 		log.Fatal(err)
 	}

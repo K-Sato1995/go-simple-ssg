@@ -27,7 +27,7 @@ func BundleCSS(templatePath string, generatedPath string) error {
 			if len(result.Errors) > 0 {
 				log.Fatalf("Failed to bundle CSS file %s: %v", path, result.Errors)
 			}
-			log.Printf("Bundled CSS file written to %s\n", outFile)
+			// log.Printf("Bundled CSS file written to %s\n", outFile)
 		}
 		return nil
 	})

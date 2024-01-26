@@ -1,0 +1,14 @@
+@import url("../layout.css");
+@import url('../reset.css');
+@import url('../global.css');
+
+
+.about__title {
+    margin: 0 auto;
+    font-size: 2rem;
+    margin: 1rem 0;
+}
+
+.about__descr {
+    margin: 1rem 0;
+}

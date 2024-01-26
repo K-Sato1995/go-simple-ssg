@@ -34,7 +34,6 @@ func GenerateDetailPages(templatePath string, generatedPath string, siteInfo con
 				fmt.Println("error parsing metadata", err)
 				return err
 			}
-			fmt.Println("meta", metadata)
 			baseName := strings.TrimSuffix(filepath.Base(path), ".md")
 			outputPath := filepath.Join(generatedPath, baseName+".html")
 			articles = append(articles, ArticleInfo{
@@ -65,7 +64,7 @@ func GenerateDetailPages(templatePath string, generatedPath string, siteInfo con
 				fmt.Println("error writing file", err)
 				return err
 			}
-			fmt.Printf("Article written to %s\n", outputPath)
+			// fmt.Printf("Article written to %s\n", outputPath)
 		}
 		return nil
 	})

@@ -1,5 +1,5 @@
-github.com/K-Sato1995/go-simple-ssg v0.0.4 h1:VxfyJ4yJ5fsKulFvv0FYoV/AAqqvL9TM31/7eHTbStc=
-github.com/K-Sato1995/go-simple-ssg v0.0.4/go.mod h1:YHycf9HcvbY/X3H4qVyRfd3RY/zLByBCLnxd737rHJI=
+github.com/K-Sato1995/go-simple-ssg v0.0.5 h1:0TDjxi3H+N7D8n6lHIKBmjji3i9Vri38Mmw9f/A00TQ=
+github.com/K-Sato1995/go-simple-ssg v0.0.5/go.mod h1:837H9UqGMeQcTvjg8Xs2Bnr7e/Sat4YexZLCB+0vZTw=
 github.com/evanw/esbuild v0.19.12 h1:p5WGo4o6TCN+kt+uZtYSGS3ZHPa+iIZ0SX+ys8UnP10=
 github.com/evanw/esbuild v0.19.12/go.mod h1:D2vIQZqV/vIf/VRHtViaUtViZmG7o+kKmlBfVQuRi48=
 github.com/gomarkdown/markdown v0.0.0-20231222211730-1d6d20845b47 h1:k4Tw0nt6lwro3Uin8eqoET7MDA4JnT8YgbCjc/g5E3k=
