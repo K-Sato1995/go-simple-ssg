@@ -2,6 +2,7 @@ package engine
 
 import (
 	"log"
+	"path/filepath"
 
 	"github.com/K-Sato1995/go-simple-ssg/builder"
 	"github.com/K-Sato1995/go-simple-ssg/config"
@@ -32,4 +33,6 @@ func (e *Engine) Build() {
 	}
 	// Create list page
 	builder.GenerateListPage(articles, e.Config.TemplatePath, e.Config.GeneratedPath, e.Config.SiteInfo)
+	// Copy static files
+	builder.CopyStaticFiles(filepath.Join(e.Config.TemplatePath, filepath.Base("static")), e.Config.GeneratedPath)
 }

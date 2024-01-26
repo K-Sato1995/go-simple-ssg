@@ -1,0 +1,9 @@
+@import url("../layout.css");
+@import url('../reset.css');
+@import url('../global.css');
+
+.not_found {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 0 1rem;
+}
