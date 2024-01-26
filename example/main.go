@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	gosimplessg "github.com/K-Sato1995/go-simple-ssg"
+	"github.com/radovskyb/watcher"
 
 	"github.com/K-Sato1995/go-simple-ssg/config"
 )
@@ -17,7 +18,7 @@ func main() {
 		},
 	})
 	engine := gosimplessg.New(baseConfig)
-	engine.Build()
+	go startHMR(baseConfig.TemplatePath, engine)
 	serveFiles()
 }
 
@@ -27,6 +28,32 @@ func serveFiles() {
 	log.Println("Serving files on http://localhost:8080...")
 	err := http.ListenAndServe(":8081", nil)
 	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func startHMR(templatePath string, engine *gosimplessg.Engine) {
+	w := watcher.New()
+	w.FilterOps(watcher.Write)
+	if err := w.AddRecursive(templatePath); err != nil {
+		log.Fatal(err)
+	}
+	go func() {
+		for {
+			select {
+			case <-w.Event:
+				log.Println("Change detected. Rebuilding...")
+				engine.Build()
+				log.Println("Rebuild completed.")
+			case err := <-w.Error:
+				log.Println("Watcher error:", err)
+			case <-w.Closed:
+				return
+			}
+		}
+	}()
+
+	if err := w.Start(250); err != nil {
 		log.Fatal(err)
 	}
 }

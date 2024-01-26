@@ -2,7 +2,10 @@ module example
 
 go 1.21.6
 
-require github.com/K-Sato1995/go-simple-ssg v0.0.4
+require (
+	github.com/K-Sato1995/go-simple-ssg v0.0.4
+	github.com/radovskyb/watcher v1.0.7
+)
 
 require (
 	github.com/evanw/esbuild v0.19.12 // indirect
