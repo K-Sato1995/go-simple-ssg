@@ -18,7 +18,7 @@ func main() {
 		},
 	})
 	engine := gosimplessg.New(baseConfig)
-	go startHMR(baseConfig.TemplatePath, engine)
+	go startHMR(baseConfig.TemplatePath, baseConfig.ContentPath, engine)
 	serveFiles()
 }
 
@@ -32,10 +32,13 @@ func serveFiles() {
 	}
 }
 
-func startHMR(templatePath string, engine *gosimplessg.Engine) {
+func startHMR(templatePath string, contentPath string, engine *gosimplessg.Engine) {
 	w := watcher.New()
 	w.FilterOps(watcher.Write)
 	if err := w.AddRecursive(templatePath); err != nil {
+		log.Fatal(err)
+	}
+	if err := w.AddRecursive(contentPath); err != nil {
 		log.Fatal(err)
 	}
 	go func() {
