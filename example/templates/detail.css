@@ -5,6 +5,7 @@
 .post-detail {
     padding: 1rem;
     margin-top: 1rem;
+    color: var(--secondary-color);
   }
 
   .post-detail__top {

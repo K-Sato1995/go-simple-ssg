@@ -18,7 +18,7 @@ simple-ssg-cli init
 - [x] CLI To run generating static contents based on the config file
   - put all the code in one func
   - create cmd to copy the template
-- [ ] write tests
-- [ ] SEO stuff
+- [x] write tests
 - [x] Custom Error pages(404)
 - [x] HMR
+- [ ] SEO stuff
