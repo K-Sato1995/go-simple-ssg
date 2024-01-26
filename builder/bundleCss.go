@@ -18,11 +18,11 @@ func BundleCSS(templatePath string, generatedPath string) error {
 		if !info.IsDir() && strings.HasSuffix(path, ".css") {
 			outFile := filepath.Join(generatedPath, filepath.Base(path))
 			result := api.Build(api.BuildOptions{
-				EntryPoints:  []string{path},
-				Bundle:       true,
-				MinifySyntax: true,
-				Outfile:      outFile,
-				Write:        true,
+				EntryPoints:      []string{path},
+				Bundle:           true,
+				MinifyWhitespace: true,
+				Outfile:          outFile,
+				Write:            true,
 			})
 			if len(result.Errors) > 0 {
 				log.Fatalf("Failed to bundle CSS file %s: %v", path, result.Errors)
